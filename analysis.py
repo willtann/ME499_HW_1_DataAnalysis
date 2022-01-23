@@ -5,35 +5,34 @@ import csv
 
 
 def load_data_from_file(filename):
-    # Open indicated file and read
-    csv_open = open(filename, 'r')
-    # csv_read = csv.DictReader(csv_reader)
-    csv_list = list(csv_open)
+    with open(filename, "r") as file:  # Open and read desired csv file
+        times = []
+        positions = []
 
-    # Make a new home for read data
-    time = []
-    position = []
+        for line in file.readlines()[1:]:
+            l = line.split(",")
+            times.append(l[0])
+            positions.append(l[1])
 
-    # Read through entire column and write all entries under the given name into a list
-    for col in csv_list:
-        time.append(col['Time'])
-        position.append(col['Position'])
+        positions = [float(position) for position in positions]
 
-        for i in col:
-            abyss = float(position(i))
+        """
+        times is a list of strings ( if you want it to be a list of floats then do... times = [float(time) for time in times]
+        positions is a list of floats
+        """
 
 
-# # BEST PERSONAL WORK
-# # Open and read desired csv file
-# csv_file = open('data1.csv', 'r')
-# csv_read = csv.reader(csv_file)
+# BEST PERSONAL WORK
+# Open and read desired csv file
+csv_file = open('data1.csv', 'r')
+csv_read = csv.reader(csv_file)
 
-# # Make two empty lists to fill with their respective data
-# time = []
-# position = []
-#
-# # Run for loop for as long as it takes to iterate for each row in .csv
-# for i in range(len(csv_file)):
+# Make two empty lists to fill with their respective data
+time = []
+position = []
+
+# Run for loop for as long as it takes to iterate for each row in .csv
+for i in range(len(csv_file)):
 
 
 if __name__ == '__main__':
