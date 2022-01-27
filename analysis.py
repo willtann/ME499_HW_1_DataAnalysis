@@ -1,26 +1,49 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_HW_1_DataAnalysis
-
-# Importing csv files
 import csv
 
 
 def load_data_from_file(filename):
+    """
+    times is a list of floats
+    positions is a list of floats
+    """
     with open(filename, "r") as file:  # Open and read desired csv file
         times = []
         positions = []
-
         for line in file.readlines()[1:]:
-            l = line.split(",")
-            times.append(l[0])
-            positions.append(l[1])
+            i = line.split(",")
+            # Known: first column holds times and second holds positions
+            times.append(i[0])
+            positions.append(i[1])
+        if len(times) == len(positions):  # Check that lists are same length
+            # Storing each entry from respective columns in new lists
+            positions = [float(position) for position in positions]
+            times = [float(time) for time in times]
+            # print(positions[:])
+            # print(times[:])
+        else:
+            raise ValueError('Lists of data and times are not of same length')
 
-        positions = [float(position) for position in positions]
 
-        """
-        times is a list of strings ( if you want it to be a list of floats then do... times = [float(time) for time in times]
-        positions is a list of floats
-        """
+def greater_than_index(mylist, mynum):
+    """
+    :param mylist: list of any numbers
+    :param mynum: specified number
+    :return: first instance of a value in list that is greater than or equal to mynum
+    """
+    for val in mylist:  # Go through all values in the list
+        # print('val = ', val)
+        # print('mynum', mynum)
+        # Go through list as long as val in mylist is smaller than mynum
+        if val < mynum:
+            continue
+        else:
+            # Return index of that number
+            return print('Position of value in list', mylist.index(val))
 
 
-if __name__ == '__main__':
-    load_data_from_file('data1.csv')
+# if __name__ == '__main__':
+#     # print(load_data_from_file('data1.csv'))
+#     # greater_than_index([1, 3, 4, 7, 10], 6)
+#     greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
+#     # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
