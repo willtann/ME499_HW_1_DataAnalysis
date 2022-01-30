@@ -19,7 +19,7 @@ def load_data_from_file(filename):
             # Storing each entry from respective columns in new lists
             positions = [float(position) for position in positions]
             times = [float(time) for time in times]
-            return positions[:] and times[:]
+            return times, positions
         else:
             raise ValueError('Lists of data and times are not of same length')
 
@@ -44,17 +44,44 @@ def greater_than_index(mylist, mynum):
 
 
 def c_initial(filename):
-    data = load_data_from_file(filename)
-    print(data[:10])
-    return
+    """
+    :param filename: local .csv file with time vs position
+    :return: the initial measured position
+    """
+    # Get lists from csv file from previous function 'load_data_from_file'
+    times, positions = load_data_from_file(filename)
+    # return the first index
+    return positions[0]
 
-# def c_max(*args):
+
+def c_max(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: the maximum measured position
+    """
+    # Get lists from csv file from previous function 'load_data_from_file'
+    times, positions = load_data_from_file(filename)
+    # return max of positions
+    return max(positions)
+
+
+def c_final(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: the final measured position
+    """
+    # Get lists from csv file from previous function 'load_data_from_file'
+    times, positions = load_data_from_file(filename)
+    # return the last index of positions
+    return positions[-1]
 
 
 if __name__ == '__main__':
-    print(load_data_from_file('data1.csv'))
+    # print(load_data_from_file('data1.csv'))
     # greater_than_index([1, 3, 4, 7, 10], 6)
     # greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
     # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
 
-    # c_initial('data1.csv')
+    print(c_initial('data1.csv'))
+    print(c_max('data1.csv'))
+    print(c_final('data1.csv'))
