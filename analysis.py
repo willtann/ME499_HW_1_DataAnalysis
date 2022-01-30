@@ -19,8 +19,7 @@ def load_data_from_file(filename):
             # Storing each entry from respective columns in new lists
             positions = [float(position) for position in positions]
             times = [float(time) for time in times]
-            # print(positions[:])
-            # print(times[:])
+            return positions[:] and times[:]
         else:
             raise ValueError('Lists of data and times are not of same length')
 
@@ -32,8 +31,8 @@ def greater_than_index(mylist, mynum):
     :return: first instance of a value in list that is greater than or equal to mynum
     """
     max_mylist = max(mylist)
-    if max_mylist <mynum:
-        return print('None')
+    if max_mylist < mynum:
+        return
     else:
         for val in mylist:  # Go through all values in the list
             # Go through list as long as val in mylist is smaller than mynum
@@ -44,14 +43,18 @@ def greater_than_index(mylist, mynum):
                 return print('Position of value in list', mylist.index(val))
 
 
+def c_initial(filename):
+    data = load_data_from_file(filename)
+    print(data[:10])
+    return
 
-
-def c_initial(*args):
-    y = args
+# def c_max(*args):
 
 
 if __name__ == '__main__':
-    # print(load_data_from_file('data1.csv'))
-    greater_than_index([1, 3, 4, 7, 10], 6)
-    greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
-    greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
+    print(load_data_from_file('data1.csv'))
+    # greater_than_index([1, 3, 4, 7, 10], 6)
+    # greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
+    # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
+
+    # c_initial('data1.csv')
