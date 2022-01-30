@@ -76,12 +76,19 @@ def c_final(filename):
     return positions[-1]
 
 
+# def rise_time(filename):
+#     # Get lists from csv file from previous function 'load_data_from_file'
+#     times, positions = load_data_from_file(filename)
+
+
 if __name__ == '__main__':
-    # print(load_data_from_file('data1.csv'))
+    load_data_from_file('data1.csv')
     # greater_than_index([1, 3, 4, 7, 10], 6)
     # greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
     # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
 
-    print(c_initial('data1.csv'))
-    print(c_max('data1.csv'))
-    print(c_final('data1.csv'))
+    # print(c_initial('data1.csv'))
+    # print(c_max('data1.csv'))
+    # print(c_final('data1.csv'))
+    #
+    # print(rise_time('data1.csv'))
