@@ -31,19 +31,27 @@ def greater_than_index(mylist, mynum):
     :param mynum: specified number
     :return: first instance of a value in list that is greater than or equal to mynum
     """
-    for val in mylist:  # Go through all values in the list
-        # print('val = ', val)
-        # print('mynum', mynum)
-        # Go through list as long as val in mylist is smaller than mynum
-        if val < mynum:
-            continue
-        else:
-            # Return index of that number
-            return print('Position of value in list', mylist.index(val))
+    max_mylist = max(mylist)
+    if max_mylist <mynum:
+        return print('None')
+    else:
+        for val in mylist:  # Go through all values in the list
+            # Go through list as long as val in mylist is smaller than mynum
+            if val < mynum:
+                continue
+            else:
+                # Return index of that number
+                return print('Position of value in list', mylist.index(val))
 
 
-# if __name__ == '__main__':
-#     # print(load_data_from_file('data1.csv'))
-#     # greater_than_index([1, 3, 4, 7, 10], 6)
-#     greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
-#     # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
+
+
+def c_initial(*args):
+    y = args
+
+
+if __name__ == '__main__':
+    # print(load_data_from_file('data1.csv'))
+    greater_than_index([1, 3, 4, 7, 10], 6)
+    greater_than_index([-2.5, 1, 4, 8, 4, 1, -2.5], 4)
+    greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
