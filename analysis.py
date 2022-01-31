@@ -1,4 +1,5 @@
 #! /Users/tannerwilliams/Desktop/ME 499/ME499_HW_1_DataAnalysis
+import math
 
 
 def load_data_from_file(filename):
@@ -161,24 +162,55 @@ def settling_time(filename):
     # return the maximum time value which is when both sides of window are stable
     return max(settle_start_time_low, settle_start_time_high)
 
-def get_system_params(perc_overshoot, settling_time):
-    zeta_439 =
 
+def get_system_params(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: mass, spring_constant, damping_ratio of system
+    """
+    # Using equation 4.39 to calculate the damping ratio
+    zeta_439 = (- math.log((perc_overshoot(filename)) / 100)) / \
+               ((math.sqrt(math.pi ** 2)) + math.log2((perc_overshoot(filename)) / 100))
+    # Using equation 4.42 to calculate w_n
+    w_n = 4 / (zeta_439 * settling_time(filename))
 
+    # Using equation 4.29 to get the mass, spring constant, and damping ratio
+    # Given
+    m = 1
+    # Spring constant is w_n squared
+    k = w_n ** 2
+    # Damping ratio is
+    c = 2 * zeta_439 * w_n
+    return m, k, c
+
+def analyze_data(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: system information
+    """
+    c_initial(filename)
+    c_max(filename)
+    c_final(filename)
+    t_r = rise_time(filename)
+    t_p = peak_time(filename)
+    percent_overshoot = perc_overshoot(filename)
+    T_s = settling_time(filename)
+    m, k, c = get_system_params(filename)
+    system_mass = m
+    system_spring = k
+    system_damping = c
+    system_dict = {'c_initial': c_initial,
+                   'c_max': c_max,
+                   'c_final': c_final,
+                   'rise_time': t_r,
+                   'peak_time': t_p,
+                   'perc_overshoot': percent_overshoot,
+                   'settling_time': T_s,
+                   'system_mass': m,
+                   'system_spring': k,
+                   'system_damping': c}
+    return dict
 
 if __name__ == '__main__':
-    # print('testing')
-    # # load_data_from_file('data1.csv')
-    # print(greater_than_index([-3.2, -2.2, -1.1], -4.0))
-    #
-    # print('Initial position = ', c_initial('data1.csv'))
-    # print('Max position = ', c_max('data1.csv'))
-    # print('Final position = ', c_final('data1.csv'))
-    #
-    print('Rise time = ', rise_time('data1.csv'))
-
-    print('Peak time = ', peak_time('data1.csv'))
-
-    print('Percent overshoot = ', perc_overshoot('data1.csv'))
-
-    print('Settling time (2%) = ', settling_time('data1.csv'))
+    print('testing')
+    print(analyze_data('data1.csv'))
