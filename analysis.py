@@ -209,7 +209,7 @@ def analyze_data(filename):
                    'system_mass': m,
                    'system_spring': k,
                    'system_damping': c}
-    return dict
+    return dict(system_dict)
 
 if __name__ == '__main__':
     print('testing')
