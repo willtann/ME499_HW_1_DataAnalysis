@@ -210,10 +210,10 @@ def analyze_data(filename):
                    'system_mass': m,
                    'system_spring': k,
                    'system_damping': c}
-    # system_dict = dict.fromkeys(system(keys), system(values))
-    # print(system)
-    return sorted(system.items())
+    for key, value in sorted(system.items()):
+        print(key, value)
+    return
 
 
 if __name__ == '__main__':
-    print(analyze_data('data1.csv'))
+    analyze_data('data1.csv')
