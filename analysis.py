@@ -4,8 +4,8 @@ import math
 
 def load_data_from_file(filename):
     """
-    times is a list of floats
-    positions is a list of floats
+    :param filename: local .csv file with time vs position
+    :return: two lists; times and positions
     """
     with open(filename, "r") as file:  # Open and read desired csv file
         times = []
@@ -42,12 +42,6 @@ def greater_than_index(mylist, mynum):
             if val >= mynum:
                 # Return index of said value
                 return mylist.index(val)
-
-            # if val < mynum:
-            #     continue
-            # else:
-            #     # Return index of that number
-            #     return print('Position of value in list', mylist.index(val))
 
 
 def c_initial(filename):
@@ -87,6 +81,10 @@ def c_final(filename):
 
 
 def rise_time(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: Rise time of system
+    """
     # Get lists from csv file from previous function 'load_data_from_file'
     times, positions = load_data_from_file(filename)
     # Retrieve c_initial and c_final... find displacement
