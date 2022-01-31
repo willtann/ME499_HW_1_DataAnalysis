@@ -210,10 +210,10 @@ def analyze_data(filename):
                    'system_mass': m,
                    'system_spring': k,
                    'system_damping': c}
-    for key, value in sorted(system.items()):
-        print(key, value)
-    return
+    return system
 
 
 if __name__ == '__main__':
-    analyze_data('data1.csv')
+    system = analyze_data('data1.csv')
+    for key, value in sorted(system.items()):
+        print(key, value)
