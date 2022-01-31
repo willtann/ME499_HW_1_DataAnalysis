@@ -170,7 +170,7 @@ def get_system_params(filename):
     """
     # Using equation 4.39 to calculate the damping ratio
     zeta_439 = (- math.log((perc_overshoot(filename)) / 100)) / \
-               ((math.sqrt(math.pi ** 2)) + math.log2((perc_overshoot(filename)) / 100))
+               ((math.sqrt(math.pi ** 2)) + (math.log((perc_overshoot(filename)) ** 2) / 100))
     # Using equation 4.42 to calculate w_n
     w_n = 4 / (zeta_439 * settling_time(filename))
 
@@ -183,14 +183,15 @@ def get_system_params(filename):
     c = 2 * zeta_439 * w_n
     return m, k, c
 
+
 def analyze_data(filename):
     """
     :param filename: local .csv file with time vs position
     :return: system information
     """
-    c_initial(filename)
-    c_max(filename)
-    c_final(filename)
+    # c_initial(filename)
+    # c_max(filename)
+    # c_final(filename)
     t_r = rise_time(filename)
     t_p = peak_time(filename)
     percent_overshoot = perc_overshoot(filename)
@@ -199,9 +200,9 @@ def analyze_data(filename):
     system_mass = m
     system_spring = k
     system_damping = c
-    system_dict = {'c_initial': c_initial,
-                   'c_max': c_max,
-                   'c_final': c_final,
+    system = {'c_initial': c_initial(filename),
+                   'c_max': c_max(filename),
+                   'c_final': c_final(filename),
                    'rise_time': t_r,
                    'peak_time': t_p,
                    'perc_overshoot': percent_overshoot,
@@ -209,8 +210,10 @@ def analyze_data(filename):
                    'system_mass': m,
                    'system_spring': k,
                    'system_damping': c}
-    return dict(system_dict)
+    # system_dict = dict.fromkeys(system(keys), system(values))
+    # print(system)
+    return sorted(system.items())
+
 
 if __name__ == '__main__':
-    print('testing')
     print(analyze_data('data1.csv'))
