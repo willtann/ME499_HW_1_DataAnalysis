@@ -133,22 +133,52 @@ def perc_overshoot(filename):
     return (net_disp / disp) * 100
 
 
-# def settling_time(filename):
+def settling_time(filename):
+    """
+    :param filename: local .csv file with time vs position
+    :return: 2% settling time of system
+    """
+    # Distance from initial to final
+    disp = abs(c_initial(filename) - c_final(filename))
+
+    # Deviation allowed on either side of final for 2% settling calculation
+    window_oneside = disp * 0.02
+
+    # Get lists from csv file from previous function 'load_data_from_file'
+    times, positions = load_data_from_file(filename)
+    # flip positions across the axis, theoretically, so that we can compare for when min positions enter settle window
+    positions_flipped = [-val for val in positions]
+    # print(positions_flipped)
+
+    # Use greater_than_index to return the indexes of when positions exit the 2% window
+    settle_start_index_high = greater_than_index(positions[::-1], c_final(filename) + window_oneside)
+    settle_start_index_low = greater_than_index(positions_flipped[::-1], c_final(filename) + window_oneside)
+
+    # Flip index value forward in time and find the corresponding time value
+    settle_start_time_high = times[len(times) - settle_start_index_high]
+    settle_start_time_low = times[len(times) - settle_start_index_low]
+
+    # return the maximum time value which is when both sides of window are stable
+    return max(settle_start_time_low, settle_start_time_high)
+
+def get_system_params(perc_overshoot, settling_time):
+    zeta_439 =
+
 
 
 if __name__ == '__main__':
-    print('testing')
-#     # load_data_from_file('data1.csv')
-#     print(greater_than_index([-3.2, -2.2, -1.1], -4.0))
-#
-#     print('Initial position = ', c_initial('data1.csv'))
-#     print('Max position = ', c_max('data1.csv'))
-#     print('Final position = ', c_final('data1.csv'))
-#
-#     print('Rise time = ', rise_time('data1.csv'))
-#
-#     print('Peak time = ', peak_time('data1.csv'))
-#
-#     print('Percent overshoot = ', perc_overshoot('data1.csv'))
-#
-#     # print('Settling time (2%) = ', settling_time('data1.csv'))
+    # print('testing')
+    # # load_data_from_file('data1.csv')
+    # print(greater_than_index([-3.2, -2.2, -1.1], -4.0))
+    #
+    # print('Initial position = ', c_initial('data1.csv'))
+    # print('Max position = ', c_max('data1.csv'))
+    # print('Final position = ', c_final('data1.csv'))
+    #
+    print('Rise time = ', rise_time('data1.csv'))
+
+    print('Peak time = ', peak_time('data1.csv'))
+
+    print('Percent overshoot = ', perc_overshoot('data1.csv'))
+
+    print('Settling time (2%) = ', settling_time('data1.csv'))
