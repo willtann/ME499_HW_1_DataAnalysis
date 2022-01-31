@@ -32,7 +32,7 @@ def greater_than_index(mylist, mynum):
     # Check if there are any values in my list larger than my number
     max_mylist = max(mylist)
     # print(max_mylist)
-    if str(max_mylist) < str(mynum):
+    if max_mylist < mynum:
         return
     else:
         # There is a larger value than my number...
@@ -139,7 +139,7 @@ def perc_overshoot(filename):
 if __name__ == '__main__':
     print('testing')
 #     # load_data_from_file('data1.csv')
-#     # greater_than_index([1.1, 2.2, 3.3, 4.4, 5.5], 100.5)
+#     print(greater_than_index([-3.2, -2.2, -1.1], -4.0))
 #
 #     print('Initial position = ', c_initial('data1.csv'))
 #     print('Max position = ', c_max('data1.csv'))
