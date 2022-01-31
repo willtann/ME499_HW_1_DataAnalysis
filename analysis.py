@@ -168,7 +168,7 @@ def get_system_params(filename):
     """
     # Using equation 4.39 to calculate the damping ratio
     zeta_439 = (- math.log((perc_overshoot(filename)) / 100)) / \
-               ((math.sqrt(math.pi ** 2)) + (math.log((perc_overshoot(filename)) ** 2) / 100))
+               ((math.sqrt(math.pi ** 2)) + (math.log2((perc_overshoot(filename))) / 100))
     # Using equation 4.42 to calculate w_n
     w_n = 4 / (zeta_439 * settling_time(filename))
 
